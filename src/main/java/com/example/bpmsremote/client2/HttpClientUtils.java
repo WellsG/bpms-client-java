@@ -69,7 +69,7 @@ public class HttpClientUtils {
             BasicSchemeFactory bsf = new BasicSchemeFactory();
             DefaultHttpClient httpclient = new DefaultHttpClient(mgr, base.getParams());
             httpclient.getAuthSchemes().register(AuthPolicy.BASIC, bsf);
-            Credentials credential = new UsernamePasswordCredentials("wguo", "redhat");
+            Credentials credential = new UsernamePasswordCredentials("wguo", "");
             httpclient.getCredentialsProvider().setCredentials(new AuthScope(null, -1, null), credential);
             return httpclient;
         } catch (Exception ex) {
