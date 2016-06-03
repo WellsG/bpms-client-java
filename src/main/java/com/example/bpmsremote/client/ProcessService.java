@@ -16,7 +16,7 @@ public class ProcessService {
     
     public static void main(String[] args) throws Exception {
         RuntimeEngine engine = RemoteRuntimeEngineFactory.newRestBuilder()
-                .addUrl(new URL("https://maitai-bpms-dt.host.qe.eng.pek2.redhat.com/business-central")).addUserName("wguo").addPassword("redhat")
+                .addUrl(new URL("https://hostname:port/business-central")).addUserName("wguo").addPassword("redhat")
                 .addDeploymentId("com.redhat.fls.repo:RepoRequest:1.1.8").build();
         KieSession ksession = engine.getKieSession();
         TaskService taskService = engine.getTaskService();
