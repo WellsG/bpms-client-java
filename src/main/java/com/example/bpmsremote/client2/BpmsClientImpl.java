@@ -21,6 +21,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.bpmsremote.model.HistoryLog;
+import com.example.bpmsremote.model.ProcessInstanceLog;
+import com.example.bpmsremote.model.StartProcessResponse;
+import com.example.bpmsremote.model.TaskContent;
+import com.example.bpmsremote.model.TaskSummary;
 import com.google.gson.Gson;
 
 public class BpmsClientImpl implements BpmsClient {
@@ -139,16 +144,18 @@ public class BpmsClientImpl implements BpmsClient {
         while ((line = rd.readLine()) != null) {
             sb.append(line);
         }
-        if (sb.toString().contains("errors") || sb.toString().contains("error")) {
+        /*if (sb.toString().contains("errors") || sb.toString().contains("error")) {
             LOGGER.error("{}", sb.toString());
             throw new Exception("http response code error: " + response.getStatusLine().getStatusCode() + "  " + sb.toString());
-        }
+        }*/
         return sb.toString();
     }
 
-    public void startProcess(String deploymentId, String processDefId, Map<String, String> params) throws Exception {
+    public StartProcessResponse startProcess(String deploymentId, String processDefId, Map<String, String> params) throws Exception {
         String result = executePost(String.format(PROCESS_START, deploymentId, processDefId), params);
         System.out.println(result);
+        StartProcessResponse response = new Gson().fromJson(result, StartProcessResponse.class);
+        return response;
     }
     
     public void startHumantask(long taksId ,Map<String, String> params) throws Exception {
@@ -161,18 +168,24 @@ public class BpmsClientImpl implements BpmsClient {
         System.out.println(result);
     }
 
-    public void listAssignTask(Map<String, String> params) throws Exception {
+    public TaskSummary listAssignTask(Map<String, String> params) throws Exception {
         String result = execute(LIST_TASK, params);
+        TaskSummary taskSummary = new Gson().fromJson(result, TaskSummary.class);
         System.out.println(result);
+        return taskSummary;
     }
 
-    public void listInstances() throws Exception {
+    public List<ProcessInstanceLog> listInstances() throws Exception {
         String result = execute(HISTORY_INSTANCES, null);
+        HistoryLog log = new Gson().fromJson(result, HistoryLog.class);
         System.out.println(result);
+        return log.getInstanceLogs();
     }
 
-    public void getTaskContent(long taskId) throws Exception {
+    public TaskContent getTaskContent(long taskId) throws Exception {
         String result = execute(String.format(GET_TASK_CONTENT, taskId),null);
+        TaskContent content = new Gson().fromJson(result, TaskContent.class);
         System.out.println(result);
+        return content;
     }
 }

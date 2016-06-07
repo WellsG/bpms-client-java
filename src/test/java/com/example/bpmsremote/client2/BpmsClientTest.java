@@ -74,7 +74,7 @@ public class BpmsClientTest {
     public void testListTasks() {
         try {
             Map<String, String> params = new HashMap<String, String>();
-            params.put("potentialOwner", "xuliu");
+            params.put("potentialOwner", "vpotesil");
             bpmsClient.listAssignTask(params);
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +93,7 @@ public class BpmsClientTest {
     @Test
     public void testGetTaskContent() {
         try {
-            long taskId = 6;
+            long taskId = 3;
             bpmsClient.getTaskContent(taskId);
         } catch (Exception e) {
             e.printStackTrace();
