@@ -8,6 +8,8 @@ public interface BpmsClient {
     public void startHumantask(long taksId ,Map<String, String> params) throws Exception;
     public void completeHumantask(long taksId ,Map<String, String> params) throws Exception;
     public void listAssignTask(Map<String, String> params) throws Exception;
+    public void listInstances() throws Exception;
+    public void getTaskContent(long taskId) throws Exception;
     
 
 }

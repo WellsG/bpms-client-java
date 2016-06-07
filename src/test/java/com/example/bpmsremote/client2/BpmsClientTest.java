@@ -74,8 +74,27 @@ public class BpmsClientTest {
     public void testListTasks() {
         try {
             Map<String, String> params = new HashMap<String, String>();
-            params.put("potentialOwner", "wguo");
+            params.put("potentialOwner", "xuliu");
             bpmsClient.listAssignTask(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testListInstances() {
+        try {
+            bpmsClient.listInstances();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetTaskContent() {
+        try {
+            long taskId = 6;
+            bpmsClient.getTaskContent(taskId);
         } catch (Exception e) {
             e.printStackTrace();
         }

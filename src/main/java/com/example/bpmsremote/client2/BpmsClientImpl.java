@@ -31,6 +31,8 @@ public class BpmsClientImpl implements BpmsClient {
     private static final String HUMANTASK_START = "/task/%d/start";
     private static final String HUMANTASK_COMPLETE= "/task/%s/complete";
     private static final String LIST_TASK = "/task/query";
+    private static final String HISTORY_INSTANCES = "/history/instances";
+    private static final String GET_TASK_CONTENT = "/task/%d/content";
     private String serverURL;
     private HttpClient httpclient;
 
@@ -161,6 +163,16 @@ public class BpmsClientImpl implements BpmsClient {
 
     public void listAssignTask(Map<String, String> params) throws Exception {
         String result = execute(LIST_TASK, params);
+        System.out.println(result);
+    }
+
+    public void listInstances() throws Exception {
+        String result = execute(HISTORY_INSTANCES, null);
+        System.out.println(result);
+    }
+
+    public void getTaskContent(long taskId) throws Exception {
+        String result = execute(String.format(GET_TASK_CONTENT, taskId),null);
         System.out.println(result);
     }
 }
