@@ -38,7 +38,7 @@ public class BpmsClientImpl implements BpmsClient {
     private static final String LIST_TASK = "/task/query";
     private static final String HISTORY_INSTANCES = "/history/instances";
     private static final String GET_TASK_CONTENT = "/task/%d/content";
-    private static final String GET_PROCESS_IMAGE = "/runtime/maitai/org:test:1.0/%d";
+    private static final String GET_PROCESS_IMAGE = "/runtime/maitai/instanceImage/%d";
     private String serverURL;
     private HttpClient httpclient;
 
@@ -192,7 +192,7 @@ public class BpmsClientImpl implements BpmsClient {
 
     public String getProcessImage(long processInstanceId) throws Exception {
         String result = execute(String.format(GET_PROCESS_IMAGE, processInstanceId),null);
-        System.out.println(result.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""));
+        //System.out.println(result.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""));
         return result.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
     }
 }
