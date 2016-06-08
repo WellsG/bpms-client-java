@@ -16,6 +16,7 @@ public interface BpmsClient {
     public TaskSummary listAssignTask(Map<String, String> params) throws Exception;
     public List<ProcessInstanceLog> listInstances() throws Exception;
     public TaskContent getTaskContent(long taskId) throws Exception;
+    public String getProcessImage(long processInstanceId) throws Exception;
     
 
 }

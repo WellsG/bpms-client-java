@@ -33,11 +33,12 @@ public class BpmsClientImpl implements BpmsClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(BpmsClientImpl.class);
     /* /runtime/{deploymentId}/process/{processDefId}/start */
     private static final String PROCESS_START = "/runtime/%s/process/%s/start";
-    private static final String HUMANTASK_START = "/task/%d/start";
-    private static final String HUMANTASK_COMPLETE= "/task/%s/complete";
+    private static final String HUMANTASK_START = "/task/maitai/%d/start";
+    private static final String HUMANTASK_COMPLETE= "/task/maitai/%s/complete";
     private static final String LIST_TASK = "/task/query";
     private static final String HISTORY_INSTANCES = "/history/instances";
     private static final String GET_TASK_CONTENT = "/task/%d/content";
+    private static final String GET_PROCESS_IMAGE = "/runtime/maitai/org:test:1.0/%d";
     private String serverURL;
     private HttpClient httpclient;
 
@@ -187,5 +188,11 @@ public class BpmsClientImpl implements BpmsClient {
         TaskContent content = new Gson().fromJson(result, TaskContent.class);
         System.out.println(result);
         return content;
+    }
+
+    public String getProcessImage(long processInstanceId) throws Exception {
+        String result = execute(String.format(GET_PROCESS_IMAGE, processInstanceId),null);
+        System.out.println(result.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""));
+        return result.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
     }
 }
