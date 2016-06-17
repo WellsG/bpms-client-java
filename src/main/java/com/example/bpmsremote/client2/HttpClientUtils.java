@@ -57,7 +57,7 @@ public class HttpClientUtils {
             DefaultHttpClient httpclient = new DefaultHttpClient(mgr, base.getParams());
             httpclient.getAuthSchemes().register(AuthPolicy.BASIC, bsf);
             Credentials credential = new UsernamePasswordCredentials("wguo", "redhat");
-            httpclient.getCredentialsProvider().setCredentials(new AuthScope(null, -1, null), credential);
+            httpclient.getCredentialsProvider().setCredentials(AuthScope.ANY, credential);
             return httpclient;
         } catch (Exception ex) {
             LOGGER.error("Wrap httpclient error.", ex);
